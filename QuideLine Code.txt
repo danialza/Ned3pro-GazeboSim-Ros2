@@ -1,0 +1,13 @@
+Gazebo Sim : 
+
+brew install gz-jetty
+
+running both server ang GUI :
+gz sim
+
+Should run both together
+only server => gz sim -s
+only GUI => gz sim -g
+
+Gazebo Hello World:
+gz sim shapes.sdf -v 4
