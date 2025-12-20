@@ -11,3 +11,25 @@ only GUI => gz sim -g
 
 Gazebo Hello World:
 gz sim shapes.sdf -v 4
+
+-----
+Conda Env Change :
+create => conda create -n ros2_env python=3.12 -y
+List => conda info --envs
+change => conda activate ros2_env
+-----
+
+ROS 2 Jazzy with RoboStack:
+
+brew install micromamba
+micromamba create -n ros_jazzy -c conda-forge -c robostack-jazzy ros-jazzy-desktop
+micromamba activate ros_jazzy
+micromamba config append channels robostack-jazzy --env
+ros2 --help
+
+
+Test Process => 
+ros2 run demo_nodes_cpp talker
+ros2 run demo_nodes_py listener
+
+Rviz comment => rviz2
