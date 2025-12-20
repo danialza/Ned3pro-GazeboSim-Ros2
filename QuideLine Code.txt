@@ -1,4 +1,4 @@
-Gazebo Sim : 
+Gazebo Sim Version 10:
 
 brew install gz-jetty
 
@@ -11,6 +11,15 @@ only GUI => gz sim -g
 
 Gazebo Hello World:
 gz sim shapes.sdf -v 4
+-----
+
+Gazebo Sim Version 6 Works Better with ROs 2 Humble:
+
+brew tap osrf/simulation
+brew install ignition-fortress
+ign gazebo -s 
+
+# Only server version Supported in MAcOS
 
 -----
 Conda Env Change :
@@ -27,9 +36,28 @@ micromamba activate ros_jazzy
 micromamba config append channels robostack-jazzy --env
 ros2 --help
 
+-----
+
+ROS 2 Humble with RoboStack:
+
+brew install micromamba
+micromamba --version
+micromamba create -n ros_humble -c conda-forge -c robostack-humble ros-humble-desktop
+micromamba activate ros_humble
+
+ros2 --help
+
+------
+
+
 
 Test Process => 
 ros2 run demo_nodes_cpp talker
 ros2 run demo_nodes_py listener
 
 Rviz comment => rviz2
+
+
+///
+Links Might Need : 
+https://docs.niryo.com/robots/ned3-pro/
