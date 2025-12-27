@@ -1,0 +1,61 @@
+Ros 2 Hummble from Here : 
+
+https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debs.html
+
+Source The ROS 2 : 
+source /opt/ros/humble/setup.bash
+
+
+--- 
+
+Turtle Sim Comments :
+
+ros2 pkg executables turtlesim
+ros2 run turtlesim turtle_teleop_key
+rqt 
+rqt_graph
+
+ros2 topic list
+See How the topic variable is => ros2 interface show geometry_msgs/msg/Twist
+ros2 topic echo /turtle1/cmd_vel
+ros2 topic info /turtle1/cmd_vel
+ros2 topic pub --once /turtle1/cmd_vel geometry_msgs/msg/Twist "{linear: {x: 2.0, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 1.8}}"
+
+
+ros2 service list
+danial@danial:~$ ros2 service type /spawn
+turtlesim/srv/Spawn
+danial@danial:~$ ros2 interface show turtlesim/srv/Spawn
+float32 x
+float32 y
+float32 theta
+string name # Optional.  A unique name will be created and returned if this is empty
+---
+string name
+ros2 service call /spawn turtlesim/srv/Spawn "{x: 2, y: 2, theta: 0.2, name: 'baby_turtle'}"
+
+ros2 param list
+ros2 param get /turtlesim background_g
+ros2 param set /turtlesim background_r 150
+
+ros2 param dump /turtlesim
+ros2 param dump /turtlesim > turtlesim.yaml
+ros2 run turtlesim turtlesim_node --ros-args --params-file turtlesim.yaml
+
+ros2 action list -t
+ros2 action info /turtle1/rotate_absolute
+ros2 interface show turtlesim/action/RotateAbsolute
+ros2 action send_goal /turtle1/rotate_absolute turtlesim/action/RotateAbsolute "{theta: 1.57}" --feedback
+
+colcon --symlink-Install --parallel-workers 1
+colcon build --packages-select <نام_پکیج>
+source install/setup.bash
+
+-----
+
+WorkSpace and Package Creation: 
+
+What we need : 
+rosdep install -i --from-path src --rosdistro humble -y
+
+ros2 pkg create --build-type ament_python --node-name my_node my_package
