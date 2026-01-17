@@ -1,0 +1,57 @@
+
+
+nvidia-smi
+
+
+curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
+curl -s -L https://nvidia.github.io/nvidia-docker/ubuntu22.04/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
+sudo apt-get update
+sudo apt-get install -y nvidia-container-toolkit
+sudo systemctl restart docker
+
+
+docker run --rm --gpus all nvidia/cuda nvidia-smi
+
+
+
+------ 
+
+Ned3Pro Robot Conection comments: 
+
+ssh niryo@ip
+user : niryo
+pass : robotics
+
+Source => source ~/setup.bash
+
+robot bringup => roslaunch niryo_robot_bringup niryo_ned3pro_robot.launch
+
+Wrapper Code which works : 
+
+python3 - <<'PY'
+import math, time
+import rospy
+from niryo_robot_python_ros_wrapper import NiryoRosWrapper
+
+rospy.init_node('niryo_wrapper_cli', anonymous=True)
+robot = NiryoRosWrapper()
+
+t0 = time.time()
+rate = rospy.Rate(2)  # 2Hz برای تست (نه 20Hz)
+
+while not rospy.is_shutdown():
+    t = time.time() - t0
+    j = [
+        0.5 * math.sin(t),
+        0.5 * math.sin(t + 1.0),
+        -1.0 + 0.3 * math.sin(t + 2.0),
+        0.3 * math.sin(t + 3.0),
+        0.3 * math.sin(t + 4.0),
+        0.3 * math.sin(t + 5.0),
+    ]
+    robot.move_joints(*j)
+    rate.sleep()
+PY
+
+
+Show Us joints information => rostopic echo /joint_states

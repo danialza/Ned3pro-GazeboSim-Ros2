@@ -1,0 +1,16 @@
+
+Using Conda (Miniforge) + Ros2 Humble Robostack + Gazebo
+
+# ساخت محیط جدید با نام ros_env
+conda create -n ros_env
+
+# فعال کردن محیط
+conda activate ros_env
+
+# اضافه کردن مخازن RoboStack
+conda config --env --add channels conda-forge
+conda config --env --add channels robostack-staging
+conda config --env --remove channels defaults
+
+# نصب ROS 2 Humble و Gazebo
+conda install ros-humble-desktop ros-humble-ros2-control ros-humble-ros2-controllers ros-humble-gazebo-ros-pkgs colcon-common-extensions -y
