@@ -1,0 +1,19 @@
+We want to run this Repository : 
+
+https://github.com/NiryoRobotics/ned-ros2-driver
+
+
+
+
+
+
+----- 
+
+This repository :
+https://github.com/NiryoRobotics/ned_ros
+
+conda activate ros_jazzy 
+
+One Terminal => ros2 run robot_state_publisher robot_state_publisher \
+  --ros-args -p robot_description:="$(cat ~/ned3_mac_ws/ned3pro.urdf)"
+One Terminal => ros2 run joint_state_publisher_gui joint_state_publisher_gui
